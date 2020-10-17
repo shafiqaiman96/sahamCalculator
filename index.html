@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
+    <link rel='stylesheet' type='text/css' href='style.css' />
+
+
+    <title>Stock Calculator</title>
+    
+    <meta name="description" content="Stock Calculator" />
+    <meta name="author" content="Shafiq Jefri" />
+</head>
+
+<body class="container">
+    <div class="header">
+        <a href="" class="logo" style="color: #f72631">Stock <span style="color: #1d4a9f">Calculator</span></a
+      >
+      <div class="header-right">
+        <!-- <a class="active" href="#home">Home</a>
+        <a href="#contact">Contact</a>
+        <a href="#about">About</a> -->
+        <img src="https://mplusonline.com/wp-content/uploads/2018/11/fgggjf.png" alt="M Plus Logo" style="float: right; width: 150px; height: 60px" />
+    </div>
+    </div>
+    <div class="jumbotron text-center">
+        <form class="container" novalidate="" action="/echo" method="POST" id="myForm">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <div class="col-sm-10">
+                            <h3 style="text-align: left">Buy</h3>
+                        </div>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" id="buy" placeholder="0.0" name="buy" step="any" required />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <div class="col-sm-10">
+                            <h3 style="text-align: left">Share Units</h3>
+                        </div>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" id="share" placeholder="0" name="share" step="any" required />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <div class="col-sm-10">
+                            <h3 style="text-align: left">Sell</h3>
+                        </div>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" id="sell" placeholder="0.0" name="sell" step="any" required />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="d-flex justify-content-center">
+        <div class="custom-control custom-checkbox mb-3">
+      <input type="checkbox" class="custom-control-input" id="customCheck" name="example1">
+      <label class="custom-control-label" for="customCheck">Intraday</label>
+    </div>
+    </div>
+        <!-- <input type="checkbox" id="intraday" name="intraday" value=true><label for="intraday">Intraday</label> -->
+        <br />
+
+        <a style="color: white" id="btnSubmit" class="btn btn-success">Calculate <i class="fa fa-calculator"></i></a>
+        <br />
+        <br />
+        <div class="d-flex justify-content-center mb-4">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="card text-white bg-info mb-3 h-100" style="max-width: 28rem; min-width: 18rem">
+                        <div class="card-header">
+                            <b> Buy </b>
+
+                            <p id="totBuy"></p>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title"><b>Buying Fee</b></h5>
+                            <h6 class="card-text" id="BUY_brokerFee" style="text-align: left"></h6>
+                            <h6 class="card-text" id="BUY_clearFee" style="text-align: left"></h6>
+                            <h6 class="card-text" id="BUY_stampduty" style="text-align: left"></h6>
+                            <h6 class="card-text" id="BUY_finalPrice" style="text-align: left"></h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="card text-white bg-info mb-3 h-100" style="max-width: 28rem; min-width: 18rem">
+                        <div class="card-header">
+                            <b>Sell</b>
+
+                            <p id="totSell"></p>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title"><b>Selling Fee</b></h5>
+
+                            <h6 class="card-text" id="SELL_brokerFee" style="text-align: left"></h6>
+                            <h6 class="card-text" id="SELL_clearFee" style="text-align: left"></h6>
+                            <h6 class="card-text" id="SELL_stampduty" style="text-align: left"></h6>
+                            <h6 class="card-text" id="SELL_finalPrice" style="text-align: left"></h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="d-flex justify-content-center">
+            <div class="card text-white mb-3" style="max-width: 18rem; min-width: 10rem" id="totalBox">
+                <div class="card-header"><b>Net Profit/Loss (RM)</b></div>
+                <div class="card-body">
+                    <h5 class="card-title" id="FINAL_price"></h5>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header"></div>
+                <div class="modal-body">
+                    <p>Please insert all required input!</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+              Close
+            </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        <div class="row" style="color: black; padding: 10px;">
+            <div class="col-sm-6">
+                <b>Report/Suggestion:</b> <a href="https://t.me/abeapiq"> @abeapiq</a>
+                <a>© 2020 Copyright</a>
+            </div>
+            <div class="col-sm-6">
+                <a href="https://paypal.me/abeapiq">Buy me a coffee <i class="fa fa-coffee"></i></a>
+              
+            </div>
+      
+      </footer>
+    <script src="script.js"></script>
+</body>
+
+</html>
